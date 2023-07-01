@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row" >
+      <div class="card mb-4">
+        <form action="{% url 'product-list' %}" method="get" class="row align-items-center flex-wrap row-gap-2">
+          <div class="col-sm-2 my-1">
+            <input type="search" class="form-control" style="color: #fff;" name="prq" placeholder="Поиск...">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-info">Поиск</button>
+          </div>
+    </form>
+      </div>
+    </div>
+    <div class="row row-cols-5 row-cols-sm-5 row-cols-md-5 g-3">
+      {% for product in products %}
+        <div class="col col-sm-6 grid-margin" style="text-decoration: none;">
+          <div class="card">
+            <img src="{{ product.image.url }}" class="shop-image bd-placeholder-img card-img-top" style="width: 233px; max-height: 299px; object-fit: cover; object-position: center;"/>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <div class="d-flex align-items-center align-self-start">
+                    <h5 class="mb-0">{{ product.title }}</h5>
+                    
+                  </div>
+                </div>
+              </div>
+              <p class="text-success mb-0 font-weight-medium">{{ product.price }}сом</p>
+              <h6 class="text-muted font-weight-normal">{{ product.shop.title }}</h6>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% include 'includes/footer.html' %}
+</div>
+{% endblock %}

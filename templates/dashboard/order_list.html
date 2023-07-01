@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row ">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Статус заказов</h4>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th> Имя клиента </th>
+                      <th> Номер заказа </th>
+                      <th> Наименование товара </th>
+                      <th> Количество </th>
+                      <th> Стоимость </th>
+                      <th> Цена итого </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in orders %}
+                    <tr>
+                      <td>
+                        <img src="https://yt3.ggpht.com/a/AGF-l78AzseOtv4fYGdmRtS7CtaL4wJZLKuFwsi54g=s900-c-k-c0xffffffff-no-rj-mo" alt="image">
+                        <span class="ps-2">{{ order.consumer }}</span>
+                      </td>
+                      <td> {{ order.id }} </td>
+                      <td> {{ order.product_name }} </td>
+                      <td> {{ order.count }} шт</td>
+                      <td> {{ order.amount }} сом</td>
+                      <td> {{ order.get_amount_total }} сом</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

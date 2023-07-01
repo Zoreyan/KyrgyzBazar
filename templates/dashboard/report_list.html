@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Отчёты</h4>
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Создано.</th>
+                          <th>Действие.</th>
+                          <th>Описание</th>
+                          <th>Сумма <sup>сом</sup></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for report in reports %}
+                        <tr>
+                            <td>{{ report.id }}</td>
+                            <td>{{ report.created }}</td>
+                            <td>{{ report.text }}</td>
+                            <td>{{ report.get_description_display }}</td>
+                            <td><label class="badge {% if report.description == '1' %}badge-danger{% else %}badge-success{% endif %}">{{ report.amount }}</label></td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

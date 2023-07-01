@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row" >
+            <div class="card mb-4">
+                <form method="get" class="row align-items-center flex-wrap row-gap-2">
+                  <!-- <div class="col-sm-2 my-1">
+                    {{ myFilter.form.title }}
+                  </div> -->
+                  <div class="col-sm-2 my-1">
+                    <select name="{{ myFilter.form.city.html_name }}" class="form-control" style="color: #fff;">
+                      {% for choice in myFilter.form.city %}
+                          <option value="{{ choice.value }}" >{{ choice }}</option>
+                      {% endfor %}
+                  </select>
+                  </div>
+      
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-info">Фильтровать</button>
+                      </div>
+                </form>
+      
+            </div>
+          </div>
+        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+            {% for vacancy in vacancies %}
+            <div class="col-lg-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h4 class="card-title text-info d-flex justify-content-between">{{ vacancy.title }}
+                                <small class="text-muted"><span class="text-success">{{ vacancy.payment }}</span>сом</small>
+                            </h4>
+                        </div>
+                        <p>{{ vacancy.description|truncatewords:40 }}</p>
+                        <div class="d-flex justify-content-between">
+                            <h5>{{ vacancy.shop }}</h5>
+                            <p>{{ vacancy.created|timesince }} назад</p>
+                        </div>
+                        <small>{{ vacancy.city }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

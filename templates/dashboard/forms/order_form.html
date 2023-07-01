@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Форма заказа</h4>
+                    <p class="card-description"> Создайте заказ </p>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="title">Наименование товара</label>
+                      {{ form.product_name }}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="street">Имя клиента</label>
+                      {{ form.consumer }}
+                    </div>
+                    <div class="form-group">
+                      <label for="open_time">Количество</label>
+                      {{ form.count }}
+                    </div>
+                    <div class="form-group">
+                      <label for="close_time">Стоимость товара</label>
+                      {{ form.amount }}
+                    </div>
+
+                    <button type="submit" class="btn btn-success me-2">Создать</button>
+                    <a href="{% url 'dashboard-main' %}" class="btn btn-dark">Отмена</a>
+                  </form>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

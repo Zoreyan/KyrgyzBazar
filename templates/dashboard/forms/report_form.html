@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Форма отчёта</h4>
+                    <p class="card-description"> Добавьте отчёт </p>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="description">Описание</label>
+                      <select class="form-control" id="description" name="description" style="color: #fff;">
+                        {% for k, v in form.fields.description.choices %}
+                        <option value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="open_time">Действие</label>
+                      {{ form.text }}
+                    </div>
+                    <div class="form-group">
+                      <label for="open_time">На сумму</label>
+                      {{ form.amount }}
+                    </div>
+                    <button type="submit" class="btn btn-success me-2">Создать</button>
+                    <a href="{% url 'dashboard-main' %}" class="btn btn-dark">Отмена</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

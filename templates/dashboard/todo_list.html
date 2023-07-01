@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="col-md-12 col-xl-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Задачи</h4>
+                    <form method="post" class="add-items d-flex">
+                      {% csrf_token %}
+                      {{ form.text }}
+                      <button class="add btn btn-primary todo-list-add-btn" type="submit">Добавить</button>
+                    </form>
+                    <div class="list-wrapper">
+                      <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
+                        {% for todo in todos %}
+                        <li {% if todo.completed %} class="completed" {% endif %}>
+                            <div class="form-check form-check-primary">
+                              <label class="form-check-label">
+                              {{ todo.text }}</label>
+                            </div>
+                            <form action="" method="post" class="remove">
+                              {% csrf_token %}
+                              <input type="hidden" value="{{ todo.id }}" name="delete">
+                              <button type="submit" style="border: none; background: none; margin: 0; padding: 0; color: grey;"><i class="mdi mdi-close-box"></i></button>
+                            </form>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

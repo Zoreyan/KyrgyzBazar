@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row" >
+      <div class="card mb-4">
+          <form action="{% url 'post-list' %}" method="get" class="row align-items-center flex-wrap row-gap-2">
+                <div class="col-sm-2 my-1">
+                  <input type="search" class="form-control" style="color: #fff;" name="pq" placeholder="Поиск...">
+                </div>
+
+                <div class="col-md-3">
+                  <button class="btn btn-info">Поиск</button>
+                </div>
+          </form>
+
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for post in posts %}
+      <a href="{% url 'post-detail' post.id %}" class="col-xl-3 col-sm-6 grid-margin stretch-card" style="text-decoration: none; ">
+        <div class="">
+          <div class="card">
+            <img src="{{ post.image.url }}" class="bd-placeholder-img card-img-top"/>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <div class="d-flex align-items-center align-self-start">
+                    <p class="mb-3">{{ post.title|truncatewords:3 }}</p>
+                  </div>
+                </div>
+              </div>
+              <h6 class="text-muted font-weight-normal">@{{ post.owner.username }}</h6>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% include 'includes/footer.html' %}
+</div>
+{% endblock %}

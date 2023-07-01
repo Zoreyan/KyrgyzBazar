@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Форма товара</h4>
+                    <p class="card-description"> Создайте товар </p>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="title">Название</label>
+                      {{ form.title }}
+                    </div>
+                    <div class="form-group">
+                      <label for="image">Изображение</label>
+                      {{ form.image }}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="category">Категория</label>
+                      <select class="form-control" id="category" name="category" style="color: #fff;">
+                          {% for category in categories %}
+                          <option value="{{ category.id }}">{{ category.title }}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="shop">Магазин</label>
+                      <select class="form-control" id="shop" name="shop" style="color: #fff;">
+                          {% for shop in shops  %}
+                          <option value="{{ shop.id }}">{{ shop.title }}</option>
+                          {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="open_time">Цена</label>
+                      {{ form.price }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary me-2">Добавить</button>
+                    <a href="{% url 'dashboard-main' %}" class="btn btn-dark">Отмена</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

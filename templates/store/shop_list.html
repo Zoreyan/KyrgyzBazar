@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row" >
+      <div class="card mb-4">
+          <form class="row align-items-center flex-wrap row-gap-2">
+                <div class="col-sm-2 my-1">
+                  <select name="{{ myFilter.form.city.html_name }}" class="form-control" style="color: #fff;">
+                    {% for choice in myFilter.form.city %}
+                        <option value="{{ choice.value }}" >{{ choice }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="col-sm-2 my-1">
+                  <select name="{{ myFilter.form.type.html_name }}" class="form-control" style="color: #fff;">
+                    {% for choice in myFilter.form.type %}
+                        <option value="{{ choice.value }}" >{{ choice }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="col-sm-2 my-1">
+                  <select name="{{ myFilter.form.category.html_name }}" class="form-control" style="color: #fff;">
+                    {% for choice in myFilter.form.category %}
+                        <option value="{{ choice.value }}" >{{ choice }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+                <div class="col-md-3">
+                  <button class="btn btn-info">Фильтровать</button>
+                </div>
+          </form>
+
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for shop in shops %}
+      <a href="{% url 'shop-detail' shop.id %}" class="col-xl-3 col-sm-6 grid-margin" style="text-decoration: none;">
+        <div class="">
+          <div class="card">
+            <img src="{{ shop.image.url }}" class="bd-placeholder-img card-img-top" style="max-height: 162px; object-fit: cover; object-position: center;"/>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <div class="d-flex align-items-center align-self-start">
+                    <p class="mb-0">{{ shop.title|truncatewords:3 }}</p>
+                  </div>
+                </div>
+              </div>
+              <h6 class="text-muted font-weight-normal">{{ shop.city }}</h6>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% include 'includes/footer.html' %}
+</div>
+{% endblock %}

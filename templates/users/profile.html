@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <div class="col-md-12 col-xl-4 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center card-box">
+                <div class="member-card pt-2 pb-2">
+                  <div class="thumb-lg member-thumb mx-auto">
+                    <img src="{{ user.avatar.url }}" class="rounded-circle" alt="profile-image" height="150" width="150" style="object-fit: cover; object-position: center;">
+                  </div><div class="">
+                    <h4>{{ user.name }}</h4>
+                    <p class="text-danger">
+                      {{ user.get_status_display }}
+                    </p>
+                    <p class="text-muted">
+                      @{{ user.username }}
+                    </p>
+                  </div>
+
+                  {% if request.user == user %}
+                  <a href="{% url 'user-form' %}" class="btn btn-outline-secondary btn-fw">Редактировать</a>
+                  {% else %}
+                  <button type="button" class="btn btn-info btn-fw">Написать</button>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
+{% endblock %}
